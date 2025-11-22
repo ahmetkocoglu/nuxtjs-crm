@@ -11,5 +11,14 @@ export default defineNuxtConfig({
     '@nuxt/scripts',
     '@nuxt/test-utils',
     '@nuxt/ui'
-  ]
+  ],
+  nitro: {
+    typescript: {
+      tsConfig: {
+        compilerOptions: {
+          types: ['node']
+        }
+      }
+    }
+  }
 })
