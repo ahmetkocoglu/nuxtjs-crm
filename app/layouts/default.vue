@@ -1,3 +1,4 @@
+
 <template>
   <div class="min-h-screen bg-gray-100">
     <!-- Header -->
@@ -51,6 +52,13 @@
                 active-class="text-blue-600 font-semibold"
               >
                 E-postalar
+              </NuxtLink>
+              <NuxtLink
+                to="/reports"
+                class="text-gray-700 hover:text-blue-600 transition-colors"
+                active-class="text-blue-600 font-semibold"
+              >
+                Raporlar
               </NuxtLink>
               <NuxtLink
                 v-if="canViewUsers"
@@ -130,6 +138,9 @@
             <NuxtLink to="/emails" class="px-4 py-2 text-gray-700 hover:bg-gray-100 rounded" @click="showMobileMenu = false">
               E-postalar
             </NuxtLink>
+            <NuxtLink to="/reports" class="px-4 py-2 text-gray-700 hover:bg-gray-100 rounded" @click="showMobileMenu = false">
+              Raporlar
+            </NuxtLink>
             <NuxtLink v-if="canViewUsers" to="/users" class="px-4 py-2 text-gray-700 hover:bg-gray-100 rounded" @click="showMobileMenu = false">
               Kullanıcılar
             </NuxtLink>
@@ -163,7 +174,6 @@ const { data: userData } = await useFetch('/api/auth/me')
 const user = computed(() => userData.value?.data)
 const canViewUsers = computed(() => user.value?.permissions?.users?.view || user.value?.role === 'admin')
 
-// Close menus when clicking outside
 onMounted(() => {
   document.addEventListener('click', (e) => {
     const target = e.target as HTMLElement
@@ -183,7 +193,6 @@ const handleLogout = async () => {
   }
 }
 
-// Redirect to login if not authenticated
 watch(userData, (data) => {
   if (data?.success === false || !data?.data) {
     router.push('/login')
