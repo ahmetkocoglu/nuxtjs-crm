@@ -577,8 +577,33 @@ const getActivityTypeName = (type: string) => {
   return names[type] || type
 }
 
-const exportReport = () => {
-  // Excel export functionality
-  alert('Excel export özelliği yakında eklenecek!')
+const exportReport = async () => {
+  try {
+    let endpoint = ''
+    const params = new URLSearchParams()
+    params.append('format', 'excel')
+    
+    if (selectedReport.value === 'sales') {
+      endpoint = '/api/export/deals'
+    } else if (selectedReport.value === 'customers') {
+      endpoint = '/api/export/customers'
+    } else if (selectedReport.value === 'activities') {
+      endpoint = '/api/export/activities'
+    }
+    
+    const response = await fetch(`${endpoint}?${params.toString()}`)
+    const blob = await response.blob()
+    
+    const url = window.URL.createObjectURL(blob)
+    const a = document.createElement('a')
+    a.href = url
+    a.download = `${selectedReport.value}-raporu-${Date.now()}.xlsx`
+    document.body.appendChild(a)
+    a.click()
+    window.URL.revokeObjectURL(url)
+    document.body.removeChild(a)
+  } catch (error) {
+    console.error('Export error:', error)
+    alert('Rapor dışa aktarılırken bir hata oluştu')
+  }
 }
-</script>
