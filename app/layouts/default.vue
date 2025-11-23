@@ -1,4 +1,3 @@
-
 <template>
   <div class="min-h-screen bg-gray-100">
     <!-- Header -->
@@ -9,60 +8,60 @@
             <NuxtLink to="/" class="text-2xl font-bold text-blue-600">
               CRM
             </NuxtLink>
-
+            
             <nav class="hidden md:flex items-center gap-6">
-              <NuxtLink
-                to="/"
+              <NuxtLink 
+                to="/" 
                 class="text-gray-700 hover:text-blue-600 transition-colors"
                 active-class="text-blue-600 font-semibold"
               >
                 Dashboard
               </NuxtLink>
-              <NuxtLink
-                to="/customers"
+              <NuxtLink 
+                to="/customers" 
                 class="text-gray-700 hover:text-blue-600 transition-colors"
                 active-class="text-blue-600 font-semibold"
               >
                 Müşteriler
               </NuxtLink>
-              <NuxtLink
-                to="/deals"
+              <NuxtLink 
+                to="/deals" 
                 class="text-gray-700 hover:text-blue-600 transition-colors"
                 active-class="text-blue-600 font-semibold"
               >
                 Fırsatlar
               </NuxtLink>
-              <NuxtLink
-                to="/tasks"
+              <NuxtLink 
+                to="/tasks" 
                 class="text-gray-700 hover:text-blue-600 transition-colors"
                 active-class="text-blue-600 font-semibold"
               >
                 Görevler
               </NuxtLink>
-              <NuxtLink
-                to="/activities"
+              <NuxtLink 
+                to="/activities" 
                 class="text-gray-700 hover:text-blue-600 transition-colors"
                 active-class="text-blue-600 font-semibold"
               >
                 Aktiviteler
               </NuxtLink>
-              <NuxtLink
-                to="/emails"
+              <NuxtLink 
+                to="/emails" 
                 class="text-gray-700 hover:text-blue-600 transition-colors"
                 active-class="text-blue-600 font-semibold"
               >
                 E-postalar
               </NuxtLink>
-              <NuxtLink
-                to="/reports"
+              <NuxtLink 
+                to="/reports" 
                 class="text-gray-700 hover:text-blue-600 transition-colors"
                 active-class="text-blue-600 font-semibold"
               >
                 Raporlar
               </NuxtLink>
-              <NuxtLink
+              <NuxtLink 
                 v-if="canViewUsers"
-                to="/users"
+                to="/users" 
                 class="text-gray-700 hover:text-blue-600 transition-colors"
                 active-class="text-blue-600 font-semibold"
               >
@@ -70,10 +69,13 @@
               </NuxtLink>
             </nav>
           </div>
-
+          
           <div class="flex items-center gap-4">
+            <!-- Notification Center -->
+            <NotificationCenter />
+            
             <div v-if="user" class="relative">
-              <button
+              <button 
                 @click="showUserMenu = !showUserMenu"
                 class="flex items-center gap-2 hover:bg-gray-100 rounded-lg px-3 py-2 transition-colors"
               >
@@ -85,19 +87,19 @@
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
                 </svg>
               </button>
-
-              <div
+              
+              <div 
                 v-if="showUserMenu"
                 class="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg py-2 border"
               >
-                <NuxtLink
-                  to="/profile"
+                <NuxtLink 
+                  to="/profile" 
                   class="block px-4 py-2 text-gray-700 hover:bg-gray-100"
                   @click="showUserMenu = false"
                 >
                   👤 Profilim
                 </NuxtLink>
-                <button
+                <button 
                   @click="handleLogout"
                   class="block w-full text-left px-4 py-2 text-red-600 hover:bg-gray-100"
                 >
@@ -105,8 +107,8 @@
                 </button>
               </div>
             </div>
-
-            <button
+            
+            <button 
               @click="showMobileMenu = !showMobileMenu"
               class="md:hidden p-2 rounded-lg hover:bg-gray-100"
             >
@@ -116,7 +118,7 @@
             </button>
           </div>
         </div>
-
+        
         <!-- Mobile Menu -->
         <div v-if="showMobileMenu" class="md:hidden py-4 border-t">
           <nav class="flex flex-col gap-2">
@@ -148,12 +150,12 @@
         </div>
       </div>
     </header>
-
+    
     <!-- Main Content -->
     <main>
       <slot />
     </main>
-
+    
     <!-- Footer -->
     <footer class="bg-white border-t mt-12">
       <div class="container mx-auto px-4 py-6">
