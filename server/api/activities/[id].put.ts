@@ -1,3 +1,4 @@
+import { connectDB } from '../../utils/mongoose'
 import { Activity } from '../../models/Activity'
 
 export default defineEventHandler(async (event) => {
@@ -5,19 +6,19 @@ export default defineEventHandler(async (event) => {
     await connectDB()
     const id = getRouterParam(event, 'id')
     const body = await readBody(event)
-    
+
     const activity = await Activity.findByIdAndUpdate(id, body, { new: true })
       .populate('customer', 'firstName lastName email company')
       .populate('deal', 'title value stage')
       .populate('task', 'title status')
-    
+
     if (!activity) {
       throw createError({
         statusCode: 404,
         message: 'Aktivite bulunamadı',
       })
     }
-    
+
     return {
       success: true,
       data: activity,
